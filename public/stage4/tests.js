@@ -17,10 +17,10 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       //
       // jQuery 版:
       //
-      // $('#firebrick').on('click', function(event) {
-      //   var $target = $(event.target);
-      //   $target.text(Number($target.text()) + 1);
-      // });
+      $('#firebrick').on('click', function(event) {
+        var $target = $(event.target);
+        $target.text(Number($target.text()) + 1);
+      });
       //
       // ここに上記のどちらかのコードを記述してください。
 
@@ -37,7 +37,10 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('2 番の要素の click イベントで要素内の数字を 1 ずつ小さくできる', function() {
 
       // ここにコードを記述してください。
-
+      $('#chocolate').on('click', function(event) {
+        var $target = $(event.target);
+        $target.text(Number($target.text()) - 1);
+      });
 
       var chocolate = document.getElementById('chocolate');
       chocolate.dispatchEvent(createClickEvent());
@@ -51,7 +54,12 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('3 番の要素の click イベントで要素を 10 度ずつ回転できる', function() {
 
       // ここにコードを記述してください。
-
+      var $deg = 0;
+      $('.mediumseagreen').on('click',function(event) {
+        var $target = $(event.target);
+        $deg += 10;
+        $target.css('transform','rotate('+$deg+'deg)');
+      })
 
       var mediumseagreen = document.querySelector('.mediumseagreen');
       mediumseagreen.dispatchEvent(createClickEvent());
@@ -67,7 +75,12 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('4 番の要素を入力された角度に回転できる', function() {
 
       // ここにコードを記述してください。
-
+      $('.turquoise').on('click',function(event) {
+        var $target = $(event.target);
+        var $deg = $('input').val();
+        console.log($deg);
+        $target.css('transform','rotate('+$deg+'deg)');
+      })
 
       var turquoise = document.querySelector('.turquoise');
       var turquoiseInput = turquoise.querySelector('input');
@@ -92,7 +105,8 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       //
       // なお、expect(steelblue).to.be.null は上記のテストの要件を満たして
       // いないので、正解ではありません。
-
+      var content = $('.steelblue').text
+      console.log(content);
       var steelblue = document.querySelector('.steelblue');
       expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
       done();
@@ -104,7 +118,7 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
 function createClickEvent() {
   var event = document.createEvent('MouseEvents');
   event.initMouseEvent('click', true, true, window,
-                       0, 0, 0, 80, 20, false, false, false, false, 0, null);
+   0, 0, 0, 80, 20, false, false, false, false, 0, null);
   return event;
 }
 
